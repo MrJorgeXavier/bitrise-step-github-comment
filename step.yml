@@ -66,18 +66,18 @@ inputs:
   - github_token: $GITHUB_TOKEN
     opts:
       title: The github token with all permissions
-  - github_owner:
+  - github_owner: $GITHUB_OWNER
     opts:
       title: The owner of the repository
-  - github_repo:
+  - github_repo: $GITHUB_REPO
     opts:
       title: The repository
-  - github_branch:
+  - github_branch: $GITHUB_BRANCH
     opts:
       title: The branch of the build
-  - github_environment:
+  - github_environment: $GITHUB_ENVIRONMENT
     opts:
       title: The environment of the build (production, debug, qa)
-  - github_target_url:
+  - github_target_url: $GITHUB_TARGET_URL
     opts:
       title: The url of the QRCode, for example

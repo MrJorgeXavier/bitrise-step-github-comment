@@ -1,27 +1,47 @@
 #!/bin/bash
 set -ex
 
-function install_swift () {
-    sudo apt-get install clang
-    sudo apt-get install libcurl3 libpython2.7 libpython2.7-dev
-
-    wget https://swift.org/builds/swift-5.1.3-release/ubuntu1804/swift-5.1.3-RELEASE/swift-5.1.3-RELEASE-ubuntu18.04.tar.gz
-    tar xzf swift-5.1.3-RELEASE-ubuntu18.04.tar.gz
-    sudo mv swift-5.1.3-RELEASE-ubuntu18.04 /usr/share/swift
-    export PATH=/usr/share/swift/usr/bin:$PATH
-    swift --version
+function install_jq () {
+    apt-get update
+    apt-get install -y curl jq
 }
 
-if ! [ -x "$(command -v swift)" ] 
+if ! [ -x "$(command -v jq)" ] 
 then
-    echo "swift is not installed, installing..."
-    install_swift
+    echo "jq json parser is not installed, installing..."
+    install_jq
 else
-    echo "swift already installed, continuing..."
+    echo "jq json parser already installed, continuing..."
 fi
 
-echo "building source..."
+# $GITHUB_TOKEN 
+# $GITHUB_BRANCH
+# $GITHUB_OWNER
+# $GITHUB_REPO
+# $GITHUB_ENVIRONMENT
+# $GITHUB_TARGET_URL
 
-swift build --configuration release
 
-./.build/release/GithubComment $GITHUB_TOKEN $GITHUB_BRANCH $GITHUB_OWNER $GITHUB_REPO $GITHUB_ENVIRONMENT $GITHUB_TARGET_URL
+
+requestHeader="Content-Type: application/json -H Authorization: token ${github_token}"
+
+#MARK: DEPLOY REQUEST
+createDeploymentRequestUrl="https://api.github.com/repos/${github_owner}/${github_repo}/deployments"
+
+createDeploymentData=$(echo '{"ref": '\"${github_branch}\"', "description": "Deploying", "payload": ""}')
+
+createDeploymentResult=$(curl -d '{"ref": '\"${github_branch}\"', "description": "Deploying", "payload": ""}' -H "Content-Type: application/json" -H "Authorization: token ${github_token}" -X POST $createDeploymentRequestUrl)
+
+deploymentId=$(echo $createDeploymentResult | jq '.id')
+
+echo "deployment request: $createDeploymentResult"
+
+
+#MARK: STATUS REQUEST
+createStatusRequestUrl="https://api.github.com/repos/${github_owner}/${github_repo}/deployments/$deploymentId/statuses"
+
+createStatusData=$(echo '{"environment": '\"${github_environment}\"',"state": "success", "target_url": '\"${github_target_url}\"', "description": "Deployment test finish"}')
+
+createStatusResult=$(curl -d $createStatusData -H $requestHeader -X POST $createStatusRequestUrl)
+
+echo "status request: $createStatusResult"

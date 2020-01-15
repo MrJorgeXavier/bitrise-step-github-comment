@@ -4,6 +4,11 @@ project_type: ""
 app:
   envs:
   - GITHUB_TOKEN: $GITHUB_TOKEN
+  - GITHUB_OWNER: $GITHUB_OWNER
+  - GITHUB_REPO: $GITHUB_REPO
+  - GITHUB_BRANCH: $GITHUB_BRANCH
+  - GITHUB_ENVIRONMENT: $GITHUB_ENVIRONMENT
+  - GITHUB_TARGET_URL: $GITHUB_TARGET_URL
   - BITRISE_STEP_ID: github-comment
   - BITRISE_STEP_VERSION: 0.0.1
   - BITRISE_STEP_GIT_CLONE_URL: https://github.com/andersonlucasg3/bitrise-step-github-comment.git
