@@ -69,3 +69,6 @@ inputs:
   - TARGET: $TARGET
     opts:
       title: The artefact name which will be searched in the INPUT
+
+outputs:
+  - BITRISE_CUSTOM_ARTIFACT_URL: $BITRISE_CUSTOM_ARTIFACT_URL

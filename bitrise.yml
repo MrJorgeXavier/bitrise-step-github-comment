@@ -5,7 +5,7 @@ app:
   envs:
   - BITRISE_STEP_ID: github-comment
   - BITRISE_STEP_VERSION: 0.0.1
-  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/andersonlucasg3/bitrise-step-github-comment.git
+  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/MrJorgeXavier/bitrise-step-github-comment.git
   - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
 workflows:
   audit-this-step:
