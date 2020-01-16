@@ -13,7 +13,7 @@ for ((INDEX = 1 ; INDEX <= $COUNT ; INDEX++)); do
     VALUE=${VALUE#">"}    
     echo "Parse Artifact: $KEY -> $VALUE"
     if [ "$KEY" == "$TARGET" ]; then    
-        BITRISE_CUSTOM_ARTIFACT_URL=$VALUE
+        export BITRISE_CUSTOM_ARTIFACT_URL=$VALUE
         echo "Target Finded: $VALUE"
     fi
 done
