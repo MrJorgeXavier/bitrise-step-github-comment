@@ -3,12 +3,6 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ""
 app:
   envs:
-  - GITHUB_TOKEN: $GITHUB_TOKEN
-  - GITHUB_OWNER: $GITHUB_OWNER
-  - GITHUB_REPO: $GITHUB_REPO
-  - GITHUB_BRANCH: $GITHUB_BRANCH
-  - GITHUB_ENVIRONMENT: $GITHUB_ENVIRONMENT
-  - GITHUB_TARGET_URL: $GITHUB_TARGET_URL
   - BITRISE_STEP_ID: github-comment
   - BITRISE_STEP_VERSION: 0.0.1
   - BITRISE_STEP_GIT_CLONE_URL: https://github.com/andersonlucasg3/bitrise-step-github-comment.git
@@ -33,12 +27,8 @@ workflows:
           file if you would not specify another value.
         run_if: "true"
         inputs:
-        - github_owner: andersonlucasg3
-        - github_repo: game-server-lib-csharp
-        - github_branch: develop
-        - github_target_url: https://www.google.com
-        - github_environment: production
-        - example_step_input: Example Step Input's value
+        - INPUT: $BITRISE_PUBLIC_INSTALL_PAGE_URL_MAP
+        - TARGET: mobile-production-release.apk        
   share-this-step:
     description: |-
       If this is the first time you try to share a Step you should

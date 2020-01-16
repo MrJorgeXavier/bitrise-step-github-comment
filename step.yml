@@ -63,21 +63,9 @@ toolkit:
     entry_file: step.sh
     
 inputs:
-  - github_token: $GITHUB_TOKEN
+  - INPUT: $INPUT
     opts:
-      title: The github token with all permissions
-  - github_owner: $GITHUB_OWNER
+      title: The string input which contains all the artefacts with the pattern '<artefact_name>=><artefact_url>' separated by '|'
+  - TARGET: $TARGET
     opts:
-      title: The owner of the repository
-  - github_repo: $GITHUB_REPO
-    opts:
-      title: The repository
-  - github_branch: $GITHUB_BRANCH
-    opts:
-      title: The branch of the build
-  - github_environment: $GITHUB_ENVIRONMENT
-    opts:
-      title: The environment of the build (production, debug, qa)
-  - github_target_url: $GITHUB_TARGET_URL
-    opts:
-      title: The url of the QRCode, for example
+      title: The artefact name which will be searched in the INPUT
