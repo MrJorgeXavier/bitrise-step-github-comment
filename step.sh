@@ -18,4 +18,6 @@ for ((INDEX = 1 ; INDEX <= $COUNT ; INDEX++)); do
     fi
 done
 
+envman add --key BITRISE_CUSTOM_ARTIFACT_URL --value "${BITRISE_CUSTOM_ARTIFACT_URL}"
+
 echo "Finded Artifact: ( $BITRISE_CUSTOM_ARTIFACT_URL )"
