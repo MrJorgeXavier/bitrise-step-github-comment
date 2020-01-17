@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "Artifact: $BITRISE_CUSTOM_ARTIFACT_URL"
 echo "Input: $INPUT"
 echo "Target: $TARGET"
 
