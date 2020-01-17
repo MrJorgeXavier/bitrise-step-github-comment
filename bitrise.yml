@@ -3,6 +3,7 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ""
 app:
   envs:
+  - BITRISE_CUSTOM_ARTIFACT_URL: $BITRISE_CUSTOM_ARTIFACT_URL
   - BITRISE_STEP_ID: github-comment
   - BITRISE_STEP_VERSION: 0.0.1
   - BITRISE_STEP_GIT_CLONE_URL: https://github.com/MrJorgeXavier/bitrise-step-github-comment.git
@@ -28,7 +29,9 @@ workflows:
         run_if: "true"
         inputs:
         - INPUT: $BITRISE_PUBLIC_INSTALL_PAGE_URL_MAP
-        - TARGET: mobile-production-release.apk        
+        - TARGET: mobile-production-release.apk       
+        outputs:
+        - BITRISE_CUSTOM_ARTIFACT_URL: $BITRISE_CUSTOM_ARTIFACT_URL 
   share-this-step:
     description: |-
       If this is the first time you try to share a Step you should
